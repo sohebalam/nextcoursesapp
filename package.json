@@ -1,0 +1,23 @@
+{
+  "name": "nextjs-simple-upload-file-to-server",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "post-update": "yarn upgrade --latest"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.2",
+    "axios": "^0.21.1",
+    "formidable": "1.2.2",
+    "next": "latest",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.6.1",
+    "react-dom": "^16.13.1",
+    "react-dropzone": "^11.3.4"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "description": ""
+}
