@@ -171,15 +171,13 @@ const CoursesForm = (props) => {
             )}
           </DropzoneArea>
         </div>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          newFile?.message && (
-            <Alert>{newFile?.message && newFile?.message}</Alert>
-          )
+        {loading && <CircularProgress />}
+        {newFile?.message && (
+          <Alert>{newFile?.message && newFile?.message}</Alert>
         )}
 
         <Button
+          style={{ marginTop: "1rem" }}
           className={classes.buttonSubmit}
           variant="contained"
           color="primary"
