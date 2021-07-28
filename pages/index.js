@@ -55,7 +55,7 @@ const App = (props) => {
           formData.append("title", title)
           formData.append("description", description)
 
-          console.log(formData)
+          // console.log(formData)
 
           setErrorMsg("")
           await axios.post(`/api/file`, formData, {
