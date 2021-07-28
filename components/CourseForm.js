@@ -1,16 +1,20 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import {
   TextField,
   Button,
   Typography,
   Paper,
   TextareaAutosize,
+  CircularProgress,
 } from "@material-ui/core"
-// import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 // import { API_URL } from "../utils/constants"
 import axios from "axios"
 import { DropzoneArea } from "material-ui-dropzone"
 import { makeStyles } from "@material-ui/core/styles"
+
+import { createFile } from "../redux/fileActions"
+import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CoursesForm = (props) => {
   const classes = useStyles()
-  const [currentId, setCurrentId] = useState(0)
   const [productData, setProductData] = useState({
     title: "",
 
@@ -45,7 +48,7 @@ const CoursesForm = (props) => {
     file: [],
   })
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const clear = () => {
     setCurrentId(0)
@@ -75,6 +78,11 @@ const CoursesForm = (props) => {
     // dropRef.current.style.border = "2px dashed #e9ebeb"
   }
 
+  const fileCreate = useSelector((state) => state.fileCreate)
+  const { loading, error, file: newFile } = fileCreate
+
+  // const { message } = newFile
+
   const updateBorder = (dragState) => {
     if (dragState === "over") {
       dropRef.current.style.border = "2px solid #000"
@@ -97,12 +105,9 @@ const CoursesForm = (props) => {
           formData.append("description", description)
 
           setErrorMsg("")
-          await axios.post(`/api/upload`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          props.history.push("/list")
+          dispatch(createFile(formData))
+
+          // props.history.push("/list")
         } else {
           setErrorMsg("Please select a file to add.")
         }
@@ -166,6 +171,13 @@ const CoursesForm = (props) => {
             )}
           </DropzoneArea>
         </div>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          newFile?.message && (
+            <Alert>{newFile?.message && newFile?.message}</Alert>
+          )
+        )}
 
         <Button
           className={classes.buttonSubmit}

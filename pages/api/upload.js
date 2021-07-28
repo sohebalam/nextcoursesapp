@@ -14,6 +14,7 @@ const post = async (req, res) => {
   const form = new formidable.IncomingForm()
   form.parse(req, async function (err, fields, files) {
     await saveFile(files.file, fields)
+
     return res.status(201).json({ message: "uploaded file" })
   })
 }

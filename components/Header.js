@@ -12,8 +12,6 @@ import { makeStyles } from "@material-ui/core/styles"
 
 import { Alert } from "@material-ui/lab"
 
-// import logo from "../images/v3.png"
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

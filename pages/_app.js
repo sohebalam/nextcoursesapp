@@ -4,7 +4,7 @@ import Head from "next/head"
 import { ThemeProvider } from "@material-ui/core/styles"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import theme from "../theme"
-// import { wrapper } from "../redux/store"
+import { wrapper } from "../redux/store"
 import Header from "../components/Header"
 import { Container } from "@material-ui/core"
 
@@ -44,4 +44,4 @@ MyApp.propTypes = {
   pageProps: PropTypes.object.isRequired,
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)
