@@ -11,13 +11,13 @@ const fileId = async (req, res) => {
 
     const filePath = `${process.cwd()}\\public\\${file.name}`
 
-    const imageBuffer = fs.createReadStream(filePath)
+    const fileBuffer = fs.createReadStream(filePath)
 
     await new Promise(function (resolve) {
       res.setHeader("Content-Type", file.file_mimetype)
-      imageBuffer.pipe(res)
-      imageBuffer.on("end", resolve)
-      imageBuffer.on("error", function (err) {
+      fileBuffer.pipe(res)
+      fileBuffer.on("end", resolve)
+      fileBuffer.on("error", function (err) {
         if (err.code === "ENOENT") {
           res.status(400).json({
             error: true,
